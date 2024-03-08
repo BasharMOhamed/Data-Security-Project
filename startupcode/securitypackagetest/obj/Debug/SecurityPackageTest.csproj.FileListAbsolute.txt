@@ -37,3 +37,12 @@ F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPacka
 F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CopyComplete
 F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
 F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
+C:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.dll
+C:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.pdb
+C:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.dll
+C:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.pdb
+C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.AssemblyReference.cache
+C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CoreCompileInputs.cache
+C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\Security.174D7A11.Up2Date
+C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
+C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
