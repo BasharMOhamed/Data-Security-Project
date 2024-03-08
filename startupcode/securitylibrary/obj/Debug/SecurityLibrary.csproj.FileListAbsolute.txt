@@ -31,3 +31,9 @@ C:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.c
 C:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.CoreCompileInputs.cache
 C:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.dll
 C:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.pdb
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\bin\Debug\SecurityLibrary.dll
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\bin\Debug\SecurityLibrary.pdb
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.AssemblyReference.cache
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.CoreCompileInputs.cache
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.dll
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.pdb

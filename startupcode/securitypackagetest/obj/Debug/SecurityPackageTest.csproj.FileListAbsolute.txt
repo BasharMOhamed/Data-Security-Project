@@ -46,3 +46,12 @@ C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPacka
 C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\Security.174D7A11.Up2Date
 C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
 C:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.dll
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.pdb
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.dll
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.pdb
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.AssemblyReference.cache
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CoreCompileInputs.cache
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CopyComplete
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
+C:\Users\engy medhat\Desktop\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
