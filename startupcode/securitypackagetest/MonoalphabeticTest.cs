@@ -51,7 +51,6 @@ namespace SecurityPackageTest
             string key = algorithm.Analyse(mainPlain, mainCipher);
             List<char> keyChar = new List<char>(key);
             Assert.AreEqual(key.Length, 26);
-            
             Assert.AreEqual(keyChar.Distinct().Count(), 26);
 
             Assert.IsTrue(regex.Match(key).Success);
@@ -171,9 +170,9 @@ namespace SecurityPackageTest
             Monoalphabetic algorithm = new Monoalphabetic();
             string key = algorithm.Analyse(newPlain, newCipher);
             List<char> keyChar = new List<char>(key);
-           
             Assert.AreEqual(key.Length, 26);
             Assert.AreEqual(keyChar.Distinct().Count(), 26);
+
             Assert.IsTrue(regex.Match(key).Success);
         }
     }

@@ -31,11 +31,11 @@ namespace SecurityLibrary
             {
                 if (key[i] == '\0')
                 {
-                    while (key.Contains(Convert.ToChar(ascii_value+97)))
+                    while (key.Contains(Convert.ToChar(ascii_value + 97)))
                     {
                         ascii_value = (ascii_value + 1) % 26;
                     }
-                    key[i] = Convert.ToChar(ascii_value+97);
+                    key[i] = Convert.ToChar(ascii_value + 97);
                 }
                 ascii_value = (ascii_value + 1) % 26;
             }
@@ -47,11 +47,11 @@ namespace SecurityLibrary
         {
             string plainText = " ";
 
-            cipherText = cipherText.Trim().ToLower();   
+            cipherText = cipherText.Trim().ToLower();
             key = key.Trim().ToLower();
 
             //Get the ASCII code from the index of chipher char in key array +97
-            for(int i=0;i < cipherText.Length; i++)
+            for (int i = 0; i < cipherText.Length; i++)
             {
                 int index = Convert.ToInt32(key.IndexOf(cipherText[i]));
                 plainText += Convert.ToChar(index + 97);
@@ -110,7 +110,7 @@ namespace SecurityLibrary
         /// <returns>Plain text</returns>
         public string AnalyseUsingCharFrequency(string cipher)
         {
-            
+
             cipher = cipher.Trim().ToLower();
 
             Dictionary<char, long> char_frequency = new Dictionary<char, long>();
@@ -143,13 +143,13 @@ namespace SecurityLibrary
                 count++;
             }
 
-           //Extract the plainText
+            //Extract the plainText
             string plainText = " ";
             for (int i = 0; i < cipher.Length; i++)
             {
                 plainText += key[cipher[i]];
             }
-            
+
             return plainText.Trim();
         }
     }
