@@ -25,3 +25,12 @@ G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityPackageTest\obj\De
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CopyComplete
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.pdb
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.pdb
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.AssemblyReference.cache
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CoreCompileInputs.cache
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CopyComplete
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb

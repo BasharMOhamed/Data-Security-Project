@@ -16,3 +16,9 @@ G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityLibrary\obj\Debug\
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.CoreCompileInputs.cache
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.dll
 G:\CURRENT DATA SECURITY\Security Package\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.pdb
+F:\Data-Security-Project\startupcode\SecurityLibrary\bin\Debug\SecurityLibrary.dll
+F:\Data-Security-Project\startupcode\SecurityLibrary\bin\Debug\SecurityLibrary.pdb
+F:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.AssemblyReference.cache
+F:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.csproj.CoreCompileInputs.cache
+F:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.dll
+F:\Data-Security-Project\startupcode\SecurityLibrary\obj\Debug\SecurityLibrary.pdb
