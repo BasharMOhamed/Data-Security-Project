@@ -39,14 +39,41 @@ namespace SecurityLibrary.AES
             {"8C", "A1", "89", "0D", "BF", "E6", "42", "68", "41", "99", "2D", "0F", "B0", "54", "BB", "16"}
         };
 
-        /*
-             02 03 01 01
-             01 02 03 01
-             01 01 02 03
-             03 01 01 02
-        */
-        string[,] galiosMatrix = { { "02", "03", "01", "01" }, { "01", "02", "03", "01" }, { "01", "01", "02", "03" }, { "03", "01", "01", "02" } };
+        string[,] INV_SBox = new string[,]
+        {
+            {"52", "09", "6A", "D5", "30", "36", "A5", "38", "BF", "40", "A3", "9E", "81", "F3", "D7", "FB"},
+            {"7C", "E3", "39", "82", "9B", "2F", "FF", "87", "34", "8E", "43", "44", "C4", "DE", "E9", "CB"},
+            {"54", "7B", "94", "32", "A6", "C2", "23", "3D", "EE", "4C", "95", "0B", "42", "FA", "C3", "4E"},
+            {"08", "2E", "A1", "66", "28", "D9", "24", "B2", "76", "5B", "A2", "49", "6D", "8B", "D1", "25"},
+            {"72", "F8", "F6", "64", "86", "68", "98", "16", "D4", "A4", "5C", "CC", "5D", "65", "B6", "92"},
+            {"6C", "70", "48", "50", "FD", "ED", "B9", "DA", "5E", "15", "46", "57", "A7", "8D", "9D", "84"},
+            {"90", "D8", "AB", "00", "8C", "BC", "D3", "0A", "F7", "E4", "58", "05", "B8", "B3", "45", "06"},
+            {"D0", "2C", "1E", "8F", "CA", "3F", "0F", "02", "C1", "AF", "BD", "03", "01", "13", "8A", "6B"},
+            {"3A", "91", "11", "41", "4F", "67", "DC", "EA", "97", "F2", "CF", "CE", "F0", "B4", "E6", "73"},
+            {"96", "AC", "74", "22", "E7", "AD", "35", "85", "E2", "F9", "37", "E8", "1C", "75", "DF", "6E"},
+            {"47", "F1", "1A", "71", "1D", "29", "C5", "89", "6F", "B7", "62", "0E", "AA", "18", "BE", "1B"},
+            {"FC", "56", "3E", "4B", "C6", "D2", "79", "20", "9A", "DB", "C0", "FE", "78", "CD", "5A", "F4"},
+            {"1F", "DD", "A8", "33", "88", "07", "C7", "31", "B1", "12", "10", "59", "27", "80", "EC", "5F"},
+            {"60", "51", "7F", "A9", "19", "B5", "4A", "0D", "2D", "E5", "7A", "9F", "93", "C9", "9C", "EF"},
+            {"A0", "E0", "3B", "4D", "AE", "2A", "F5", "B0", "C8", "EB", "BB", "3C", "83", "53", "99", "61"},
+            {"17", "2B", "04", "7E", "BA", "77", "D6", "26", "E1", "69", "14", "63", "55", "21", "0C", "7D"}
+        };
 
+        string[,] INV_galiosMatrix =
+        {
+            { "0E", "0B", "0D", "09" },
+            { "09", "0E", "0B", "0D" },
+            { "0D", "09", "0E", "0B" },
+            { "0B", "0D", "09", "0E" }
+        };
+
+        string[,] galiosMatrix =
+        {
+            { "02", "03", "01", "01" },
+            { "01", "02", "03", "01" },
+            { "01", "01", "02", "03" },
+            { "03", "01", "01", "02" }
+        };
 
         /*
                         Rcon
@@ -59,15 +86,12 @@ namespace SecurityLibrary.AES
 
         string[] RoundKeys = new string[11];
 
-
-
-        //////////////////////// HELPER FUNCTIONS //////////////////////////////////
-        
         // Convert From Hexa To Binary
         public static string ToBinary(string hexa)
         {
-            string binaryValue = Convert.ToString(Convert.ToInt64(hexa, 16), 2);
-            return binaryValue.PadLeft(64, '0');
+            string binaryValue1 = Convert.ToString(Convert.ToInt64(hexa.Substring(0, hexa.Length / 2), 16), 2).PadLeft(hexa.Length * 2, '0');
+            string binaryValue2 = Convert.ToString(Convert.ToInt64(hexa.Substring(hexa.Length / 2), 16), 2).PadLeft(hexa.Length * 2, '0');
+            return binaryValue1 + binaryValue2;
         }
 
         // Convert From Binary To Hexa
@@ -82,25 +106,31 @@ namespace SecurityLibrary.AES
             return hexa;
         }
 
-        // Convert With S-BOX
-        public string SubBytes(string state, int length)
+        // Get The result from (S-Box Matrix / INV S-Box Matrix)      enc: True --> S-Box  False --> INV S-Box
+        public string SubBytes(string state, bool enc)
         {
             string subByteOutput = "";
 
-            for (int i = 0; i < length - 1; i += 2)
+            for (int i = 0; i < state.Length - 1; i += 2)
             {
 
                 int index1 = Convert.ToInt32(state[i].ToString(), 16);
 
                 int index2 = Convert.ToInt32(state[i + 1].ToString(), 16);
-
-                subByteOutput += sBox[index1, index2];
+                if (enc)
+                {
+                    subByteOutput += sBox[index1, index2];
+                }
+                else
+                {
+                    subByteOutput += INV_SBox[index1, index2];
+                }
             }
             return subByteOutput;
         }
 
-        // Shift Rows Function
-        public string ShiftLeftRows(string state)
+        // Shift Rows      enc: True --> Shift The Rows To The Left  False --> Shift The Rows To The Right
+        public string ShiftRows(string state, bool enc)
         {
             string[,] stateMatrix = new string[4, 4];
             int stateIndex = 0;
@@ -122,7 +152,14 @@ namespace SecurityLibrary.AES
                 string[] shiftedRow = new string[4];
                 for (int col = 0; col < 4; col++)
                 {
-                    shiftedRow[col] = stateMatrix[row, (col + row) % 4];
+                    if (enc)
+                    {
+                        shiftedRow[col] = stateMatrix[row, (col + row) % 4];
+                    }
+                    else
+                    {
+                        shiftedRow[col] = stateMatrix[row, (col - row + 4) % 4];
+                    }
                 }
 
                 for (int col = 0; col < 4; col++)
@@ -144,7 +181,7 @@ namespace SecurityLibrary.AES
             return shiftedState;
         }
 
-        // XOR Between Two Binary variables
+        // XOR Between two Binary Variables
         public static string XOR(string binary1, string binary2)
         {
             string result = "";
@@ -158,61 +195,49 @@ namespace SecurityLibrary.AES
             return result;
         }
 
-
+        // GF
         public string GaliosMultiplictaion(string state, string matrix)
         {
 
-            string binaryState = state;
+            const string IrreduciblePolynomial = "100011011";
 
-            string mod = "00011011";
+            matrix = ToBinary(matrix);
 
-            binaryState += "0";
-            binaryState = binaryState.Substring(1);
+            string result = "00000000";
 
-            switch (matrix)
+            while (matrix != "00000000")
             {
-                case "01":
+                if (matrix[7] == '1')
+                {
+                    result = XOR(result, state);
 
-                    return state;
+                }
 
-                case "02":
+                state += '0';
 
+                if (state[0] == '1')
+                {
 
-                    if (state[0] == '1')
-                    {
+                    state = XOR(IrreduciblePolynomial, state);
 
-                        return XOR(binaryState, mod);
-                    }
-                    else
-                    {
+                }
 
-                        return binaryState;
-                    }
-                case "03":
+                state = state.Substring(1);
+                matrix = '0' + matrix.Remove(7);
 
-                    if (state[0] == '1')
-                    {
-
-                        string result = XOR(binaryState, mod);
-
-                        return XOR(result, state);
-                    }
-                    else
-                    {
-                        return XOR(binaryState, state);
-                    }
             }
-            return " ";
+
+            return result;
+
         }
 
-        public string MixColumns(string state)
+        public string MixColumns(string state, bool enc)
         {
             string mixColumnsOutput = "";
 
             List<string> galiosResult = new List<string>();
-
-
-
+            Console.WriteLine(state.Length);
+            string result;
             for (int i = 0; i < 128; i += 32)
             {
                 int index;
@@ -221,8 +246,14 @@ namespace SecurityLibrary.AES
                     index = i;
                     for (int k = 0; k < 4; k++)
                     {
-
-                        string result = GaliosMultiplictaion(state.Substring(index, 8), galiosMatrix[j, k]);
+                        if (enc)
+                        {
+                            result = GaliosMultiplictaion(state.Substring(index, 8), galiosMatrix[j, k]);
+                        }
+                        else
+                        {
+                            result = GaliosMultiplictaion(state.Substring(index, 8), INV_galiosMatrix[j, k]);
+                        }
                         galiosResult.Add(result);
                         index += 8;
                     }
@@ -245,7 +276,7 @@ namespace SecurityLibrary.AES
             return mixColumnsOutput;
         }
 
-        // Get all Round Keys in array
+        // Store The 11 Keys in Array
         void KeyExpansion(string key)
         {
             RoundKeys[0] = key;
@@ -256,11 +287,11 @@ namespace SecurityLibrary.AES
 
                 lastColumn = lastColumn.Substring(8) + lastColumn.Substring(0, 8);
 
-                lastColumn = ToBinary(SubBytes(ToHexa(lastColumn).PadLeft(8, '0'), 8));
+                lastColumn = ToBinary(SubBytes(ToHexa(lastColumn).PadLeft(8, '0'), true));
 
-                string result1 = XOR(lastColumn.Substring(32, 32), RoundKeys[i - 1].Substring(0, 32));
+                string result1 = XOR(lastColumn, RoundKeys[i - 1].Substring(0, 32));
 
-                RoundKeys[i] = XOR(result1, ToBinary(RCon.Substring((i - 1) * 8, 8)).Substring(32, 32));
+                RoundKeys[i] = XOR(result1, ToBinary(RCon.Substring((i - 1) * 8, 8)));
 
                 for (int j = 0; j < 3; j++)
                 {
@@ -271,16 +302,43 @@ namespace SecurityLibrary.AES
 
         }
 
-        // XOR State with Rounded Key
         string AddRoundKey(string plainText, string key)
         {
             return XOR(plainText, key);
         }
 
-        ////////////////////////////////// MAIN FUNCTIONS ///////////////////////////////
         public override string Decrypt(string cipherText, string key)
         {
-            throw new NotImplementedException();
+
+            key = key.Substring(2);
+            cipherText = cipherText.Substring(2);
+            string binaryKey = ToBinary(key);
+
+            KeyExpansion(binaryKey);
+
+            string binaryCipherText = ToBinary(cipherText);
+
+            binaryCipherText = AddRoundKey(binaryCipherText, RoundKeys[10]);
+
+            for (int i = 9; i > 0; i--)
+            {
+                string InvShiftRows = ShiftRows(ToHexa(binaryCipherText), false);
+                string InvsubBytes = SubBytes(InvShiftRows, false);
+
+                string binaryOutput = ToBinary(InvsubBytes);
+
+                string InvAddRoundKey = AddRoundKey(binaryOutput, RoundKeys[i]);
+                binaryCipherText = MixColumns(InvAddRoundKey, false);
+            }
+
+            string LastInvShiftRows = ShiftRows(ToHexa(binaryCipherText), false);
+            string LastInvsubBytes = SubBytes(LastInvShiftRows, false);
+
+            string binarySubBytes = ToBinary(LastInvsubBytes);
+
+            string LastInvAddRoundKey = AddRoundKey(binarySubBytes, RoundKeys[0]);
+
+            return "0x" + ToHexa(LastInvAddRoundKey);
         }
 
         public override string Encrypt(string plainText, string key)
@@ -288,32 +346,25 @@ namespace SecurityLibrary.AES
             key = key.Substring(2);
             plainText = plainText.Substring(2);
 
-
-            string binaryKey1 = ToBinary(key.Substring(0, 16));
-            string binaryKey2 = ToBinary(key.Substring(16, 16));
-            string binaryKey = binaryKey1 + binaryKey2;
+            string binaryKey = ToBinary(key);
 
 
             KeyExpansion(binaryKey);
 
-            string binaryPlainText1 = ToBinary(plainText.Substring(0, 16));
-            string binaryPlainText2 = ToBinary(plainText.Substring(16, 16));
-            string binaryPlainText = binaryPlainText1 + binaryPlainText2;
+            string binaryPlainText = ToBinary(plainText);
 
 
             binaryPlainText = AddRoundKey(binaryPlainText, binaryKey);
             for (int i = 0; i < 9; i++)
             {
 
-                string subByteOutput = SubBytes(ToHexa(binaryPlainText), 32);
+                string subByteOutput = SubBytes(ToHexa(binaryPlainText), true);
 
-                string shiftLeftRowsOutput = ShiftLeftRows(subByteOutput);
+                string shiftLeftRowsOutput = ShiftRows(subByteOutput, true);
 
-                string binaryOutput1 = ToBinary(shiftLeftRowsOutput.Substring(0, 16));
-                string binaryOutput2 = ToBinary(shiftLeftRowsOutput.Substring(16, 16));
-                string binaryOutput = binaryOutput1 + binaryOutput2;
+                string binaryOutput = ToBinary(shiftLeftRowsOutput);
 
-                string mixColumnsOutput = MixColumns(binaryOutput);
+                string mixColumnsOutput = MixColumns(binaryOutput, true);
 
                 string addRoundKeyOutput = AddRoundKey(mixColumnsOutput, RoundKeys[i + 1]);
 
@@ -321,11 +372,9 @@ namespace SecurityLibrary.AES
 
             }
 
-            string lastRoundSub = SubBytes(ToHexa(binaryPlainText), 32);
-            string lastShiftRow = ShiftLeftRows(lastRoundSub);
-            string result1 = ToBinary(lastShiftRow.Substring(0, 16));
-            string result2 = ToBinary(lastShiftRow.Substring(16, 16));
-            string result = result1 + result2;
+            string lastRoundSub = SubBytes(ToHexa(binaryPlainText), true);
+            string lastShiftRow = ShiftRows(lastRoundSub, true);
+            string result = ToBinary(lastShiftRow);
 
             return "0x" + ToHexa(AddRoundKey(result, RoundKeys[10]));
         }
