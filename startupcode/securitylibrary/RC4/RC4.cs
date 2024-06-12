@@ -33,7 +33,8 @@ namespace SecurityLibrary.RC4
             for(int i = 0; i < 256; i++)
             {
                 S.Add(i);
-                T.Add((key[i % key.Length]) - 0);
+                T.Add((key[i % key.Length]));
+                Console.WriteLine(T[i]);
             }
 
             int j = 0, temp;

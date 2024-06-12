@@ -10,7 +10,6 @@ namespace SecurityLibrary
     {
         public string Analyse(string plainText, string cipherText)
         {
-            //throw new NotImplementedException();
             string key = "";
             string temp = "";
             char ch;
